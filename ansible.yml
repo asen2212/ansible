@@ -1,0 +1,22 @@
+---
+- name: Create a file in the /tmp directory
+  hosts: all
+  become: true
+  tasks:
+    - name: Ensure /tmp directory exists
+      file:
+        path: /tmp
+        state: directory
+        mode: '0755'
+ 
+    - name: Create a file in /tmp directory
+      file:
+        path: /tmp/myfile.txt
+        state: touch
+        mode: '0644'
+ 
+    - name: Add content to the file
+      copy:
+        content: "This is a test file created by Ansible.\n"
+        dest: /tmp/myfile.txt
+        mode: '0644'
